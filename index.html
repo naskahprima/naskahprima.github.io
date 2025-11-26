@@ -340,7 +340,7 @@
     <header class="header">
       <nav class="nav-container">
         <a href="#" class="logo" style="text-decoration: none">
-          <img src="./asset/logo.png" alt="Naskah Prima Logo" />
+          <img src="./asset/logo.png" alt="Naskah Prima Logo" loading="lazy" />
           <span class="logo-text">Naskah Prima</span>
         </a>
 
@@ -2153,6 +2153,44 @@
       </div>
     </section>
 
+    <!-- Blog Section -->
+    <section class="blog section" id="blog">
+      <div class="section-container">
+        <h2 class="section-title">📰 Blog & Tips Publikasi Jurnal</h2>
+        <p class="section-subtitle">
+          Artikel, tutorial, dan tips seputar publikasi jurnal SINTA untuk
+          mahasiswa informatika
+        </p>
+
+        <!-- Blog Grid (akan diisi otomatis oleh JavaScript) -->
+        <div class="blog-grid" id="blogGrid">
+          <!-- Loading State -->
+          <div class="blog-loading">
+            <div class="loading-spinner"></div>
+            <p>Memuat artikel...</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Blog Modal -->
+    <div class="blog-modal" id="blogModal">
+      <div class="blog-modal-overlay" onclick="closeBlogModal()"></div>
+      <div class="blog-modal-content">
+        <button class="blog-modal-close" onclick="closeBlogModal()">✕</button>
+        <div class="blog-modal-header">
+          <span class="blog-modal-category" id="modalCategory"></span>
+          <h2 class="blog-modal-title" id="modalTitle"></h2>
+          <div class="blog-modal-meta">
+            <span id="modalDate"></span>
+            <span>•</span>
+            <span id="modalReadTime"></span>
+          </div>
+        </div>
+        <div class="blog-modal-body" id="modalContent"></div>
+      </div>
+    </div>
+
     <!-- Contact Section -->
     <section class="contact section" id="kontak">
       <div class="section-container">
@@ -2322,6 +2360,7 @@
                 src="./asset/logo.png"
                 alt="Naskah Prima Logo"
                 style="height: 50px; margin-bottom: 1rem"
+                loading="lazy"
               />
               <h3>Naskah Prima</h3>
             </div>
@@ -2592,16 +2631,16 @@
 
           const text = `Halo Naskah Prima!
 
-  Nama: ${name}
-  Email: ${email}
-  WhatsApp: ${phone}
-  Universitas: ${university}
-  Layanan: ${serviceLabel}
+    Nama: ${name}
+    Email: ${email}
+    WhatsApp: ${phone}
+    Universitas: ${university}
+    Layanan: ${serviceLabel}
 
-  Detail:
-  ${message}
+    Detail:
+    ${message}
 
-  Saya tertarik untuk konsultasi lebih lanjut!`;
+    Saya tertarik untuk konsultasi lebih lanjut!`;
 
           const waLink = `https://wa.me/6289691789422?text=${encodeURIComponent(
             text
@@ -2647,6 +2686,218 @@
         // Initial update
         updateActiveDot();
       });
+    </script>
+    <script>
+      // ==========================================
+      // BLOG PAGINATION SYSTEM
+      // ==========================================
+
+      let allPosts = []; // Semua artikel dari JSON
+      let displayedCount = 0; // Berapa artikel yang udah ditampilkan
+      const postsPerPage = 6; // 6 artikel per load
+
+      // Load Blog Posts
+      async function loadBlogPosts() {
+        try {
+          const response = await fetch("./blog-posts.json");
+          const data = await response.json();
+
+          // Sort by date (newest first)
+          allPosts = data.posts.sort(
+            (a, b) => new Date(b.date) - new Date(a.date)
+          );
+
+          // Tampilkan 6 artikel pertama
+          displayPosts(postsPerPage);
+
+          // Setup Load More button
+          setupLoadMoreButton();
+        } catch (error) {
+          console.error("Error loading blog posts:", error);
+          document.getElementById("blogGrid").innerHTML =
+            '<p style="text-align:center; color:var(--danger); padding:2rem;">Gagal memuat artikel. Coba refresh halaman.</p>';
+        }
+      }
+
+      // Function untuk tampilkan artikel
+      function displayPosts(count) {
+        const blogGrid = document.getElementById("blogGrid");
+
+        // Ambil artikel yang mau ditampilkan
+        const postsToShow = allPosts.slice(
+          displayedCount,
+          displayedCount + count
+        );
+
+        // Kalau ini load pertama, clear loading state
+        if (displayedCount === 0) {
+          blogGrid.innerHTML = "";
+        }
+
+        // Loop dan buat card untuk setiap artikel
+        postsToShow.forEach((post, index) => {
+          const card = createBlogCard(post);
+
+          // Tambah delay untuk animasi fade-in (staggered)
+          setTimeout(() => {
+            card.style.opacity = "0";
+            blogGrid.appendChild(card);
+
+            // Trigger fade-in animation
+            setTimeout(() => {
+              card.style.transition = "opacity 0.5s ease, transform 0.5s ease";
+              card.style.opacity = "1";
+            }, 10);
+          }, index * 100); // Delay 100ms per card (efek cascade)
+        });
+
+        // Update counter
+        displayedCount += postsToShow.length;
+
+        // Update Load More button visibility
+        updateLoadMoreButton();
+      }
+
+      // Setup Load More Button
+      function setupLoadMoreButton() {
+        const blogGrid = document.getElementById("blogGrid");
+
+        // Cek apakah button udah ada
+        let loadMoreBtn = document.getElementById("loadMoreBtn");
+
+        if (!loadMoreBtn) {
+          // Buat button baru
+          loadMoreBtn = document.createElement("div");
+          loadMoreBtn.id = "loadMoreBtn";
+          loadMoreBtn.className = "load-more-container";
+          loadMoreBtn.innerHTML = `
+      <button class="btn-load-more">
+        📖 Muat Artikel Lainnya
+      </button>
+      <p class="load-more-info">
+        Menampilkan <span id="displayedPostsCount">${displayedCount}</span> dari <span id="totalPostsCount">${allPosts.length}</span> artikel
+      </p>
+    `;
+
+          // Insert setelah blogGrid
+          blogGrid.parentNode.insertBefore(loadMoreBtn, blogGrid.nextSibling);
+
+          // Event listener
+          loadMoreBtn
+            .querySelector(".btn-load-more")
+            .addEventListener("click", () => {
+              displayPosts(postsPerPage);
+            });
+        }
+
+        updateLoadMoreButton();
+      }
+
+      // Update Load More Button visibility & counter
+      function updateLoadMoreButton() {
+        const loadMoreBtn = document.getElementById("loadMoreBtn");
+        const button = loadMoreBtn?.querySelector(".btn-load-more");
+        const displayedSpan = document.getElementById("displayedPostsCount");
+        const totalSpan = document.getElementById("totalPostsCount");
+
+        if (loadMoreBtn) {
+          // Update counter
+          if (displayedSpan) displayedSpan.textContent = displayedCount;
+          if (totalSpan) totalSpan.textContent = allPosts.length;
+
+          // Hide button kalau udah semua artikel ditampilkan
+          if (displayedCount >= allPosts.length) {
+            if (button) button.style.display = "none";
+
+            // Ganti teks jadi "Semua artikel sudah ditampilkan"
+            const infoText = loadMoreBtn.querySelector(".load-more-info");
+            if (infoText) {
+              infoText.innerHTML = "✅ Semua artikel sudah ditampilkan";
+              infoText.style.color = "var(--success)";
+              infoText.style.fontWeight = "600";
+            }
+          } else {
+            if (button) button.style.display = "block";
+          }
+        }
+      }
+
+      // Create Blog Card Element (TIDAK BERUBAH)
+      function createBlogCard(post) {
+        const card = document.createElement("div");
+        card.className = "blog-card";
+        card.onclick = () => openBlogModal(post);
+
+        card.innerHTML = `
+    <div class="blog-card-header">
+      <span class="blog-category">${post.category}</span>
+      <span class="blog-date">📅 ${formatDate(post.date)}</span>
+    </div>
+    <h3 class="blog-card-title">${post.title}</h3>
+    <p class="blog-card-excerpt">${post.excerpt}</p>
+    <div class="blog-card-footer">
+      <span class="blog-read-time">⏱️ ${post.readTime}</span>
+      <span class="blog-read-more">Baca Selengkapnya →</span>
+    </div>
+  `;
+
+        return card;
+      }
+
+      // Format Date (TIDAK BERUBAH)
+      function formatDate(dateString) {
+        const months = [
+          "Jan",
+          "Feb",
+          "Mar",
+          "Apr",
+          "Mei",
+          "Jun",
+          "Jul",
+          "Agu",
+          "Sep",
+          "Okt",
+          "Nov",
+          "Des",
+        ];
+        const date = new Date(dateString);
+        return `${date.getDate()} ${
+          months[date.getMonth()]
+        } ${date.getFullYear()}`;
+      }
+
+      // Open Blog Modal (TIDAK BERUBAH)
+      function openBlogModal(post) {
+        const modal = document.getElementById("blogModal");
+
+        document.getElementById("modalCategory").textContent = post.category;
+        document.getElementById("modalTitle").textContent = post.title;
+        document.getElementById("modalDate").textContent = formatDate(
+          post.date
+        );
+        document.getElementById(
+          "modalReadTime"
+        ).textContent = `⏱️ ${post.readTime}`;
+        document.getElementById("modalContent").innerHTML = post.content;
+
+        modal.classList.add("active");
+        document.body.style.overflow = "hidden";
+      }
+
+      // Close Blog Modal (TIDAK BERUBAH)
+      function closeBlogModal() {
+        const modal = document.getElementById("blogModal");
+        modal.classList.remove("active");
+        document.body.style.overflow = "";
+      }
+
+      // Close modal when pressing ESC key (TIDAK BERUBAH)
+      document.addEventListener("keydown", (e) => {
+        if (e.key === "Escape") closeBlogModal();
+      });
+
+      // Load posts when page is ready
+      document.addEventListener("DOMContentLoaded", loadBlogPosts);
     </script>
   </body>
 </html>
