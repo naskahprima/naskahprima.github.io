@@ -3235,13 +3235,31 @@ body {
 }
 
 /* Desktop: Hide horizontal scroll, show table */
+/* Tampilkan cards di semua ukuran layar */
 @media (min-width: 769px) {
   .comparison-cards-container {
-    display: none; /* Hide cards di desktop */
+    display: block; /* ✅ UBAH JADI BLOCK */
   }
 
-  .comparison-table-wrapper {
-    display: block; /* Show table di desktop */
+  /* Optional: Tampilkan semua card sejajar di desktop */
+  .comparison-cards-wrapper {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2rem;
+    overflow-x: visible;
+    margin: 0;
+    padding: 2rem 0;
+  }
+
+  .comparison-card {
+    min-width: 100%;
+    scroll-snap-align: none;
+  }
+
+  /* Hide dots dan swipe hint di desktop */
+  .cards-dots,
+  .swipe-hint {
+    display: none;
   }
 }
 

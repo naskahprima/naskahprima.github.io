@@ -2350,5 +2350,41 @@ Saya tertarik untuk konsultasi lebih lanjut!`;
           // this.reset();
         });
     </script>
+
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        const wrapper = document.querySelector(".comparison-cards-wrapper");
+        const cards = document.querySelectorAll(".comparison-card");
+        const dots = document.querySelectorAll(".dot");
+
+        // Fungsi untuk update active dot
+        function updateActiveDot() {
+          const scrollLeft = wrapper.scrollLeft;
+          const cardWidth = cards[0].offsetWidth;
+          const currentIndex = Math.round(scrollLeft / cardWidth);
+
+          dots.forEach((dot, index) => {
+            dot.classList.toggle("active", index === currentIndex);
+          });
+        }
+
+        // Event listener untuk scroll
+        wrapper.addEventListener("scroll", updateActiveDot);
+
+        // Event listener untuk klik dot
+        dots.forEach((dot, index) => {
+          dot.addEventListener("click", () => {
+            const cardWidth = cards[0].offsetWidth;
+            wrapper.scrollTo({
+              left: cardWidth * index,
+              behavior: "smooth",
+            });
+          });
+        });
+
+        // Initial update
+        updateActiveDot();
+      });
+    </script>
   </body>
 </html>
