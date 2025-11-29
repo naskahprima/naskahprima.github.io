@@ -1,0 +1,36 @@
+# robots.txt - Naskah Prima
+# Allow all crawlers including AI
+
+User-agent: *
+Allow: /
+
+# AI Crawlers - CRITICAL for AI Search visibility!
+User-agent: GPTBot
+Allow: /
+
+User-agent: ChatGPT-User
+Allow: /
+
+User-agent: ClaudeBot
+Allow: /
+
+User-agent: Claude-Web
+Allow: /
+
+User-agent: PerplexityBot
+Allow: /
+
+User-agent: Bingbot
+Allow: /
+
+User-agent: Google-Extended
+Allow: /
+
+User-agent: Googlebot
+Allow: /
+
+User-agent: Applebot
+Allow: /
+
+# Sitemap
+Sitemap: https://naskahprima.github.io/sitemap.xml
