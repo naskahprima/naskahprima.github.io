@@ -3819,6 +3819,158 @@ body {
 .blog-modal-body table td {
   border: 1px solid var(--bg-dark);
 }
+/* ==========================================
+   NUCLEAR FIX: Force SEMUA text di modal body
+   ========================================== */
+
+/* Base: Semua elemen di modal body = terang */
+.blog-modal-body,
+.blog-modal-body * {
+  color: var(--text-primary) !important;
+}
+
+/* Box dengan background apapun = text tetap gelap jika background terang */
+.blog-modal-body [style*="background: #f"],
+.blog-modal-body [style*="background:#f"],
+.blog-modal-body [style*="background: rgb(2"] {
+  color: #1a1332 !important; /* Dark text untuk background terang */
+}
+
+.blog-modal-body [style*="background: #f"] *,
+.blog-modal-body [style*="background:#f"] *,
+.blog-modal-body [style*="background: rgb(2"] * {
+  color: #1a1332 !important;
+}
+
+/* Exception: Headings tetap ungu */
+.blog-modal-body h1,
+.blog-modal-body h2,
+.blog-modal-body h3,
+.blog-modal-body h4,
+.blog-modal-body h5,
+.blog-modal-body h6 {
+  color: var(--primary) !important;
+}
+
+/* Exception: Strong/Bold tetap putih (kecuali di box terang) */
+.blog-modal-body strong,
+.blog-modal-body b {
+  color: #ffffff !important;
+}
+
+.blog-modal-body [style*="background: #f"] strong,
+.blog-modal-body [style*="background:#f"] strong,
+.blog-modal-body [style*="background: rgb(2"] strong {
+  color: #0f0a1e !important; /* Super dark untuk strong di background terang */
+}
+
+/* Exception: Links tetap orange */
+.blog-modal-body a {
+  color: var(--accent) !important;
+}
+
+.blog-modal-body [style*="background: #f"] a,
+.blog-modal-body [style*="background:#f"] a {
+  color: #764ba2 !important; /* Purple untuk link di background terang */
+}
+
+/* ==========================================
+   FIX: Box dengan background biru muda
+   ========================================== */
+
+/* Box biru muda (background: #dbeafe, #f0f9ff, #bfdbfe, dll) */
+.blog-modal-body [style*="background: #dbeafe"],
+.blog-modal-body [style*="background:#dbeafe"],
+.blog-modal-body [style*="background: #f0f9ff"],
+.blog-modal-body [style*="background:#f0f9ff"],
+.blog-modal-body [style*="background: #bfdbfe"],
+.blog-modal-body [style*="background:#bfdbfe"] {
+  color: #0f0a1e !important; /* Dark purple text */
+}
+
+.blog-modal-body [style*="background: #dbeafe"] *,
+.blog-modal-body [style*="background:#dbeafe"] *,
+.blog-modal-body [style*="background: #f0f9ff"] *,
+.blog-modal-body [style*="background:#f0f9ff"] *,
+.blog-modal-body [style*="background: #bfdbfe"] *,
+.blog-modal-body [style*="background:#bfdbfe"] * {
+  color: #0f0a1e !important;
+}
+
+/* Strong di box biru muda */
+.blog-modal-body [style*="background: #dbeafe"] strong,
+.blog-modal-body [style*="background:#dbeafe"] strong,
+.blog-modal-body [style*="background: #f0f9ff"] strong,
+.blog-modal-body [style*="background:#f0f9ff"] strong,
+.blog-modal-body [style*="background: #bfdbfe"] strong,
+.blog-modal-body [style*="background:#bfdbfe"] strong {
+  color: #0f0a1e !important;
+  font-weight: 700;
+}
+
+/* Box kuning muda (background: #fef3c7, #fef9c3, dll) */
+.blog-modal-body [style*="background: #fef3c7"],
+.blog-modal-body [style*="background:#fef3c7"],
+.blog-modal-body [style*="background: #fef9c3"],
+.blog-modal-body [style*="background:#fef9c3"] {
+  color: #0f0a1e !important;
+}
+
+.blog-modal-body [style*="background: #fef3c7"] *,
+.blog-modal-body [style*="background:#fef3c7"] *,
+.blog-modal-body [style*="background: #fef9c3"] *,
+.blog-modal-body [style*="background:#fef9c3"] * {
+  color: #0f0a1e !important;
+}
+
+/* Box hijau muda (background: #dcfce7, #d1fae5, dll) */
+.blog-modal-body [style*="background: #dcfce7"],
+.blog-modal-body [style*="background:#dcfce7"],
+.blog-modal-body [style*="background: #d1fae5"],
+.blog-modal-body [style*="background:#d1fae5"] {
+  color: #0f0a1e !important;
+}
+
+.blog-modal-body [style*="background: #dcfce7"] *,
+.blog-modal-body [style*="background:#dcfce7"] *,
+.blog-modal-body [style*="background: #d1fae5"] *,
+.blog-modal-body [style*="background:#d1fae5"] * {
+  color: #0f0a1e !important;
+}
+
+/* Box merah muda (background: #fee2e2, #fecaca, dll) */
+.blog-modal-body [style*="background: #fee2e2"],
+.blog-modal-body [style*="background:#fee2e2"],
+.blog-modal-body [style*="background: #fecaca"],
+.blog-modal-body [style*="background:#fecaca"],
+.blog-modal-body [style*="background: #fef2f2"],
+.blog-modal-body [style*="background:#fef2f2"] {
+  color: #0f0a1e !important;
+}
+
+.blog-modal-body [style*="background: #fee2e2"] *,
+.blog-modal-body [style*="background:#fee2e2"] *,
+.blog-modal-body [style*="background: #fecaca"] *,
+.blog-modal-body [style*="background:#fecaca"] *,
+.blog-modal-body [style*="background: #fef2f2"] *,
+.blog-modal-body [style*="background:#fef2f2"] * {
+  color: #0f0a1e !important;
+}
+
+/* Box abu-abu muda (background: #f9fafb, #f3f4f6, dll) */
+.blog-modal-body [style*="background: #f9fafb"],
+.blog-modal-body [style*="background:#f9fafb"],
+.blog-modal-body [style*="background: #f3f4f6"],
+.blog-modal-body [style*="background:#f3f4f6"] {
+  color: #0f0a1e !important;
+}
+
+.blog-modal-body [style*="background: #f9fafb"] *,
+.blog-modal-body [style*="background:#f9fafb"] *,
+.blog-modal-body [style*="background: #f3f4f6"] *,
+.blog-modal-body [style*="background:#f3f4f6"] * {
+  color: #0f0a1e !important;
+}
 
 /* Responsive */
 @media (max-width: 768px) {
