@@ -1,112 +1,134 @@
 <!DOCTYPE html>
 <html lang="id">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
     <!-- 301 Redirect ke domain baru -->
-    <meta http-equiv="refresh" content="0; url=https://naskahprima.com/">
-    <link rel="canonical" href="https://naskahprima.com/">
-    
+    <!-- <meta http-equiv="refresh" content="0; url=https://naskahprima.com/"> -->
+    <link rel="canonical" href="https://naskahprima.com/" />
+
     <!-- SEO Meta Tags -->
-    <title>Naskah Prima - Jasa Publikasi Jurnal SINTA | Pindah ke naskahprima.com</title>
-    <meta name="description" content="Naskah Prima telah pindah ke naskahprima.com. Jasa publikasi jurnal SINTA untuk mahasiswa informatika dengan sistem Zero Risk Payment.">
-    <meta name="robots" content="noindex, follow">
-    
+    <title>
+      Naskah Prima - Jasa Publikasi Jurnal SINTA | Pindah ke naskahprima.com
+    </title>
+    <meta
+      name="description"
+      content="Naskah Prima telah pindah ke naskahprima.com. Jasa publikasi jurnal SINTA untuk mahasiswa informatika dengan sistem Zero Risk Payment."
+    />
+    <meta name="robots" content="noindex, follow" />
+
     <!-- Open Graph -->
-    <meta property="og:title" content="Naskah Prima - Pindah ke naskahprima.com">
-    <meta property="og:description" content="Website telah pindah ke domain baru. Klik untuk mengunjungi naskahprima.com">
-    <meta property="og:url" content="https://naskahprima.com/">
-    <meta property="og:type" content="website">
-    
+    <meta
+      property="og:title"
+      content="Naskah Prima - Pindah ke naskahprima.com"
+    />
+    <meta
+      property="og:description"
+      content="Website telah pindah ke domain baru. Klik untuk mengunjungi naskahprima.com"
+    />
+    <meta property="og:url" content="https://naskahprima.com/" />
+    <meta property="og:type" content="website" />
+
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+      body {
+        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+          Oxygen, Ubuntu, sans-serif;
+        background: linear-gradient(135deg, #554d89 0%, #7c3aed 100%);
+        min-height: 100vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 20px;
+      }
+      .container {
+        background: white;
+        padding: 40px;
+        border-radius: 16px;
+        box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+        text-align: center;
+        max-width: 500px;
+        width: 100%;
+      }
+      .logo {
+        font-size: 48px;
+        margin-bottom: 20px;
+      }
+      h1 {
+        color: #554d89;
+        font-size: 24px;
+        margin-bottom: 16px;
+      }
+      p {
+        color: #666;
+        margin-bottom: 24px;
+        line-height: 1.6;
+      }
+      .loader {
+        width: 40px;
+        height: 40px;
+        border: 4px solid #f3f3f3;
+        border-top: 4px solid #554d89;
+        border-radius: 50%;
+        animation: spin 1s linear infinite;
+        margin: 0 auto 24px;
+      }
+      @keyframes spin {
+        0% {
+          transform: rotate(0deg);
         }
-        body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif;
-            background: linear-gradient(135deg, #554d89 0%, #7c3aed 100%);
-            min-height: 100vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            padding: 20px;
+        100% {
+          transform: rotate(360deg);
         }
-        .container {
-            background: white;
-            padding: 40px;
-            border-radius: 16px;
-            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
-            text-align: center;
-            max-width: 500px;
-            width: 100%;
-        }
-        .logo {
-            font-size: 48px;
-            margin-bottom: 20px;
-        }
-        h1 {
-            color: #554d89;
-            font-size: 24px;
-            margin-bottom: 16px;
-        }
-        p {
-            color: #666;
-            margin-bottom: 24px;
-            line-height: 1.6;
-        }
-        .loader {
-            width: 40px;
-            height: 40px;
-            border: 4px solid #f3f3f3;
-            border-top: 4px solid #554d89;
-            border-radius: 50%;
-            animation: spin 1s linear infinite;
-            margin: 0 auto 24px;
-        }
-        @keyframes spin {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
-        }
-        .btn {
-            display: inline-block;
-            background: #554d89;
-            color: white;
-            padding: 14px 32px;
-            border-radius: 8px;
-            text-decoration: none;
-            font-weight: 600;
-            transition: all 0.3s ease;
-        }
-        .btn:hover {
-            background: #7c3aed;
-            transform: translateY(-2px);
-        }
-        .note {
-            margin-top: 20px;
-            font-size: 14px;
-            color: #999;
-        }
+      }
+      .btn {
+        display: inline-block;
+        background: #554d89;
+        color: white;
+        padding: 14px 32px;
+        border-radius: 8px;
+        text-decoration: none;
+        font-weight: 600;
+        transition: all 0.3s ease;
+      }
+      .btn:hover {
+        background: #7c3aed;
+        transform: translateY(-2px);
+      }
+      .note {
+        margin-top: 20px;
+        font-size: 14px;
+        color: #999;
+      }
     </style>
-</head>
-<body>
+  </head>
+  <body>
     <div class="container">
-        <div class="logo">📚</div>
-        <h1>Naskah Prima Telah Pindah!</h1>
-        <div class="loader"></div>
-        <p>Website kami telah pindah ke alamat baru:<br><strong>naskahprima.com</strong></p>
-        <p>Anda akan dialihkan secara otomatis dalam beberapa detik...</p>
-        <a href="https://naskahprima.com/" class="btn">Kunjungi naskahprima.com →</a>
-        <p class="note">Jika tidak dialihkan otomatis, klik tombol di atas.</p>
+      <div class="logo">📚</div>
+      <h1>Naskah Prima Telah Pindah!</h1>
+      <div class="loader"></div>
+      <p>
+        Website kami telah pindah ke alamat baru:<br /><strong
+          >naskahprima.com</strong
+        >
+      </p>
+      <p>Anda akan dialihkan secara otomatis dalam beberapa detik...</p>
+      <a href="https://naskahprima.com/" class="btn"
+        >Kunjungi naskahprima.com →</a
+      >
+      <p class="note">Jika tidak dialihkan otomatis, klik tombol di atas.</p>
     </div>
 
     <script>
-        // Fallback redirect jika meta refresh tidak bekerja
-        setTimeout(function() {
-            window.location.href = 'https://naskahprima.com/';
-        }, 2000);
+      // Fallback redirect jika meta refresh tidak bekerja
+      setTimeout(function () {
+        window.location.href = "https://naskahprima.com/";
+      }, 2000);
     </script>
-</body>
+  </body>
 </html>
